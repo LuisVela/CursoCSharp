@@ -4,7 +4,7 @@ using System.Linq;
 using CoreEscuela.Entidades;
 using CoreEscuela.Util;
 
-namespace CoreEscuela
+namespace CoreEscuela.App
 {
     public sealed class EscuelaEngine
     {
@@ -18,7 +18,7 @@ namespace CoreEscuela
         public void Inicializar()
         {
             Escuela = new Escuela("Platzi Academy", 2012, TiposEscuela.Primaria,
-                ciudad: "Bogotá", pais: "Colombia"
+            ciudad: "Bogotá", pais: "Colombia"
             );
 
             CargarCursos();
@@ -28,7 +28,7 @@ namespace CoreEscuela
         }
 
         public void ImprimirDiccionario(Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>> dic,
-            bool imprEval = false)
+                        bool imprEval = false)
         {
             foreach (var objdic in dic)
             {
@@ -68,7 +68,7 @@ namespace CoreEscuela
         {
             var diccionario = new Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>>();
 
-            diccionario.Add(LlaveDiccionario.Escuela, new[] { Escuela });
+            //diccionario.Add(LlaveDiccionario.Escuela, new[] { Escuela });
             diccionario.Add(LlaveDiccionario.Curso, Escuela.Cursos.Cast<ObjetoEscuelaBase>());
 
             var listatmp = new List<Evaluacion>();
@@ -87,11 +87,11 @@ namespace CoreEscuela
 
             }
             diccionario.Add(LlaveDiccionario.Evaluacion,
-                listatmp.Cast<ObjetoEscuelaBase>());
+                                    listatmp.Cast<ObjetoEscuelaBase>());
             diccionario.Add(LlaveDiccionario.Asignatura,
-                listatmpas.Cast<ObjetoEscuelaBase>());
+                                    listatmpas.Cast<ObjetoEscuelaBase>());
             diccionario.Add(LlaveDiccionario.Alumno,
-                listatmpal.Cast<ObjetoEscuelaBase>());
+                                    listatmpal.Cast<ObjetoEscuelaBase>());
             return diccionario;
         }
 
@@ -100,7 +100,7 @@ namespace CoreEscuela
             bool traeAlumnos = true,
             bool traeAsignaturas = true,
             bool traeCursos = true
-        )
+            )
         {
 
             return GetObjetosEscuela(out int dummy, out dummy, out dummy, out dummy);
@@ -108,37 +108,37 @@ namespace CoreEscuela
 
         public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(
             out int conteoEvaluaciones,
-            bool traeEvaluaciones = true,
-            bool traeAlumnos = true,
-            bool traeAsignaturas = true,
-            bool traeCursos = true
-        )
+           bool traeEvaluaciones = true,
+           bool traeAlumnos = true,
+           bool traeAsignaturas = true,
+           bool traeCursos = true
+           )
         {
 
             return GetObjetosEscuela(out conteoEvaluaciones, out int dummy, out dummy, out dummy);
         }
 
         public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(
-            out int conteoEvaluaciones, out int conteoCursos,
-            bool traeEvaluaciones = true,
-            bool traeAlumnos = true,
-            bool traeAsignaturas = true,
-            bool traeCursos = true
-        )
+                        out int conteoEvaluaciones, out int conteoCursos,
+                        bool traeEvaluaciones = true,
+                        bool traeAlumnos = true,
+                        bool traeAsignaturas = true,
+                        bool traeCursos = true
+                        )
         {
 
             return GetObjetosEscuela(out conteoEvaluaciones, out conteoCursos, out int dummy, out dummy);
         }
 
         public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(
-            out int conteoEvaluaciones,
-            out int conteoCursos,
-            out int conteoAsignaturas,
-            bool traeEvaluaciones = true,
-            bool traeAlumnos = true,
-            bool traeAsignaturas = true,
-            bool traeCursos = true
-        )
+                        out int conteoEvaluaciones,
+                        out int conteoCursos,
+                        out int conteoAsignaturas,
+                        bool traeEvaluaciones = true,
+                        bool traeAlumnos = true,
+                        bool traeAsignaturas = true,
+                        bool traeCursos = true
+             )
         {
 
             return GetObjetosEscuela(out conteoEvaluaciones, out conteoCursos, out conteoAsignaturas, out int dummy);
@@ -153,7 +153,7 @@ namespace CoreEscuela
             bool traeAlumnos = true,
             bool traeAsignaturas = true,
             bool traeCursos = true
-        )
+            )
         {
             conteoAlumnos = conteoAsignaturas = conteoEvaluaciones = 0;
 
@@ -206,7 +206,8 @@ namespace CoreEscuela
                                 Asignatura = asignatura,
                                 Nombre = $"{asignatura.Nombre} Ev#{i + 1}",
                                 Nota = MathF.Round(
-                                5 * (float)rnd.NextDouble(), 2),
+                                    5 * (float)rnd.NextDouble()
+                                    , 2),
                                 Alumno = alumno
                             };
                             alumno.Evaluaciones.Add(ev);
@@ -217,15 +218,17 @@ namespace CoreEscuela
 
         }
 
+
+
         private void CargarAsignaturas()
         {
             foreach (var curso in Escuela.Cursos)
             {
-                var listaAsignaturas = new List<Asignatura>() {
-                    new Asignatura { Nombre = "Matemáticas" },
-                    new Asignatura { Nombre = "Educación Física" },
-                    new Asignatura { Nombre = "Castellano" },
-                    new Asignatura { Nombre = "Ciencias Naturales" }
+                var listaAsignaturas = new List<Asignatura>(){
+                            new Asignatura{Nombre="Matemáticas"} ,
+                            new Asignatura{Nombre="Educación Física"},
+                            new Asignatura{Nombre="Castellano"},
+                            new Asignatura{Nombre="Ciencias Naturales"}
                 };
                 curso.Asignaturas = listaAsignaturas;
             }
@@ -247,12 +250,12 @@ namespace CoreEscuela
 
         private void CargarCursos()
         {
-            Escuela.Cursos = new List<Curso>() {
-                new Curso () { Nombre = "101", Jornada = TiposJornada.Mañana },
-                new Curso () { Nombre = "201", Jornada = TiposJornada.Mañana },
-                new Curso { Nombre = "301", Jornada = TiposJornada.Mañana },
-                new Curso () { Nombre = "401", Jornada = TiposJornada.Tarde },
-                new Curso () { Nombre = "501", Jornada = TiposJornada.Tarde },
+            Escuela.Cursos = new List<Curso>(){
+                        new Curso(){ Nombre = "101", Jornada = TiposJornada.Mañana },
+                        new Curso() {Nombre = "201", Jornada = TiposJornada.Mañana},
+                        new Curso{Nombre = "301", Jornada = TiposJornada.Mañana},
+                        new Curso(){ Nombre = "401", Jornada = TiposJornada.Tarde },
+                        new Curso() {Nombre = "501", Jornada = TiposJornada.Tarde},
             };
 
             Random rnd = new Random();

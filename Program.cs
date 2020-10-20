@@ -24,13 +24,13 @@ namespace CoreEscuela
             var listaAsg = reporteador.GetListaAsignaturas();
             var listaEvalXAsig = reporteador.GetDicEvaluaXAsig();
             var listaPromXAsig = reporteador.GetPromeAlumnPorAsignatura();
-
+            var listMejoresPromAsig = reporteador.GetMejoresPromxAsig("Matemáticas",10);
         }
 
         private static void AccionDelEvento(object sender, EventArgs e)
         {
             Printer.WriteTitle("SALIENDO");
-            Printer.Beep(3000, 1000, 3);
+            //Printer.Beep(3000, 1000, 3);
             Printer.WriteTitle("SALIÓ");
         }
 
